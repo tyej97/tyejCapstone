@@ -1,0 +1,10 @@
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\obj\Debug\SearchForm.csprojAssemblyReference.cache
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\obj\Debug\SearchForm.Form1.resources
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\obj\Debug\SearchForm.Properties.Resources.resources
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\obj\Debug\SearchForm.csproj.GenerateResource.cache
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\obj\Debug\SearchForm.csproj.CoreCompileInputs.cache
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\bin\Debug\SearchForm.exe.config
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\bin\Debug\SearchForm.exe
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\bin\Debug\SearchForm.pdb
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\obj\Debug\SearchForm.exe
+C:\Users\Craig Tye\Desktop\Homework\Capstone\Capstone Project\SearchForm\SearchForm\obj\Debug\SearchForm.pdb
