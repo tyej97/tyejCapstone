@@ -23,18 +23,15 @@ namespace SearchForm
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            string[] array = new string[5] { "1", "2", "3", "4", "5" };
+            /*string[] array = new string[5] { "1", "2", "3", "4", "5" };
             for(int i = 0; i < array.Length; i++)
             {
                 CreateNewCell( i ,array[i]);
             }
-
-
-            Point temp = new Point(100, 100);
-            String tempString = "Fast";
-            if (cell1.Location == temp)
-                return;
-            MoveCellTo(cell1,temp,tempString);
+            */
+            label1.Text = hScrollBar1.Value.ToString();
+            Thread workerThread = new Thread(new ThreadStart(MoveCellTo));
+            workerThread.Start();
 
         }//end of startButton_Click
 
@@ -45,51 +42,131 @@ namespace SearchForm
 
         }//end of createNewCell
 
-        private void MoveCellTo(Label current, Point newLocation, String speed)
+        private void MoveCellTo()
         {
+            Label current = cell1;
+            String speed = "Fast";
+            Point newLocation = new Point(Convert.ToInt32(Math.Round(numericUpDown1.Value,0)), Convert.ToInt32(Math.Round(numericUpDown2.Value, 0)));
             int movingXFactor = 0; //the number of pixels the cell will move each frame on the X axis
             int movingYFactor = 0; //the number of pixels the cell will move each frame on the Y axis
             //Timer to cause the wait between each frame
 
             switch (speed)
             {
-                case "Fast": movingXFactor = (newLocation.X - current.Location.X) / 5;
-                    movingYFactor = (newLocation.Y - current.Location.Y) / 5;
+                case "Fast":
+                    if (newLocation.X - current.Location.X > 0)
+                    {
+                        movingXFactor = (newLocation.X - current.Location.X) / 5;
+                    }
+                    else
+                    {
+                        movingXFactor = (newLocation.X - current.Location.X) / 5;
+                    }
+                    if (newLocation.Y - current.Location.Y > 0)
+                    {
+                        movingYFactor = (newLocation.Y - current.Location.Y) / 5;
+                    }
+                    else
+                    {
+                        movingYFactor = (newLocation.Y - current.Location.Y) / 5;
+                    }
                     break;
             } // end of switch statement
 
             if(speed == "Fast")
             {
                 
-                Point[] moveArray = new Point[5];
-                for(int i = 0; i<5; i++) //For loop to calculate the coordinates needed for each frame of the fast movement animation and load them into the moveArray
+                int[,] moveArray = new int[5,2];// X is stored in [x,0] and Y is stored in [x,1]
+                for(int i = 0; i<4; i++) //For loop to calculate the coordinates needed for each frame of the fast movement animation and load them into the moveArray
                 {
-                    int tempX = current.Location.X + (movingXFactor * i);
-                    int tempY = current.Location.Y + (movingYFactor * i);
-                    moveArray[i] = new Point(tempX, tempY);
+                    moveArray[i,0] = current.Location.X + (movingXFactor * i);
+                    moveArray[i,1] = current.Location.Y + (movingYFactor * i);
                 }
+                moveArray[4, 0] = newLocation.X;
+                moveArray[4, 1] = newLocation.Y;
 
-                current.Location = moveArray[0];
-                current.Update();
-                for (int j = 1; j < 5; j++)
+
+                for (int j = 0; j < 5; j++)
                 {
-                    SleepFor(1000);
-                    mre.WaitOne();
-        
-                    current.Location = moveArray[j];
-                    current.Refresh();
-                }
+                    Thread.Sleep(10);
+                    if(current.Left < moveArray[j,0] || current.Left > moveArray[j, 0])
+                    {
+                        HideCell(current);
+                        Thread.Sleep(10);
+                        MoveCellHorizontally(current, moveArray[j, 0]);
+                        MoveCellVertically(current, moveArray[j, 1]);
+                        
+                        Thread.Sleep(hScrollBar1.Value);
+                        
+                    }
+
+                }//end of for loop
                 
             }//end of if(speed == fast)
 
-            current.Location = new Point(100, 100);
         }//end of MoveCellTo
 
 
-        private void SleepFor(int milliseconds)
+        private void MoveCellHorizontally(Label cell, int xCoordinate)
         {
-            Thread.Sleep(milliseconds);
-            mre.Set();
+            Task.Factory.StartNew(() =>
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    cell.Left = xCoordinate;
+                    cell.Show();
+                    cell.Refresh();
+                });
+            });
+        }//end of MoveCellHorizontally
+
+        private void MoveCellVertically(Label cell, int yCoordinate)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    cell.Top = yCoordinate;
+                    cell.Show();
+                    cell.Refresh();
+                });
+            });
+        }//end of MoveCellHorizontally
+
+        private void HideCell(Label cell)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    cell.Hide();
+                });
+            });
+        }
+
+        private void ShowCell(Label cell)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    cell.Show();
+                });
+            });
+        }
+
+        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            label1.Text = hScrollBar1.Value.ToString();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label1.Text = hScrollBar1.Value.ToString();
+            for (int x = 0; x < updownCells.Value; x++)
+            {
+                //CreateNewCell(55, "cell");
+            }
         }
     }
 }
