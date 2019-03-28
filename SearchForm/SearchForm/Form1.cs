@@ -15,15 +15,24 @@ namespace SearchForm
     {
         private static ManualResetEvent mre = new ManualResetEvent(false);
         private Label[] cellArray;
+        private int[] valueArray;
+        private string filePath = "C:\\Users\\Craig Tye\\Desktop\\Homework\\Capstone\\Capstone Project\\tyejCapstone\\SearchForm\\SearchForm\\ArrayValues.txt";
         #region cell defaults
         private static bool defaultAutoSizeSetting = false;
         private static int defaultCellWidth = 30;
         private static int defaultCellHeight = 20;
         private static BorderStyle defaultCellBorderStyle = BorderStyle.FixedSingle;
         private static ContentAlignment defaultCellTextAlign = ContentAlignment.MiddleCenter;
+        private static Color defaultColor = SystemColors.Control;
         private static Point defaultCellPosition = new Point(20, 100);
-        private static Point[] ArrayPositions = new Point[] { new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point()};
-         // Point numbering guide                            
+        private static Point[] ArrayPositions = new Point[] { new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point(), new Point() };
+        // Point numbering guide                            
+        #endregion
+        #region Color Set
+        private static Color correct = Color.LightGreen;
+        private static Color ignore = Color.LightGray;
+        private static Color selected = Color.LightBlue;
+        private static Color wrong = Color.Red;
         #endregion
 
 
@@ -41,72 +50,86 @@ namespace SearchForm
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            /*string[] array = new string[5] { "1", "2", "3", "4", "5" };
-            for(int i = 0; i < array.Length; i++)
-            {
-                CreateNewCell( i ,array[i]);
-            }
-            */
             ScrollLabel.Text = hScrollBar1.Value.ToString();
-            Thread workerThread = new Thread(new ThreadStart(MoveCellTo));
+            Thread workerThread = new Thread(new ThreadStart(RunProgram));
             workerThread.Start();
 
         }//end of startButton_Click
 
-        private void CreateNewCell(int cellname, string cellValue)
+        private void RunProgram()
         {
-            label1.Visible = true;
+            if (LoadValueArray() == true)
+            {
+                int selection = -1; //int representing the selected list item for which search process to use.
+                for (int i = 0; i < 3; i++)
+                {
+                    if (checkedListBox1.GetItemChecked(i) == true)
+                    {
+                        selection = i;
+                    }
+                }
 
+                switch (selection)
+                {
+                    case 0: LinearSearch();
+                        break;
+                    case 1:
+                        MessageBox.Show("Binary");//BinarySearch();
+                        break;
+                    case 2:
+                        MessageBox.Show("Interpolation");//InterpolationSearch();
+                        break;
+                    case -1: MessageBox.Show("No Search type selected.");
+                        break;
+                }
+            }
+        }
 
-        }//end of createNewCell
-
-        private void MoveCellTo()
+        private void MoveCellTo(Label current, Point newLocation)
         {
-            Label current = label1;
-            Point newLocation = new Point(Convert.ToInt32(Math.Round(numericUpDown1.Value,0)), Convert.ToInt32(Math.Round(numericUpDown2.Value, 0)));
             int movingXFactor = 0; //the number of pixels the cell will move each frame on the X axis
             int movingYFactor = 0; //the number of pixels the cell will move each frame on the Y axis
-            //Timer to cause the wait between each frame
+            int numberOfFrames = 5;
 
             if (newLocation.X - current.Location.X > 0)
             {
-                movingXFactor = (newLocation.X - current.Location.X) / 5;
+                movingXFactor = (newLocation.X - current.Location.X) / numberOfFrames;
             }
             else
             {
-                movingXFactor = (newLocation.X - current.Location.X) / 5;
+                movingXFactor = (newLocation.X - current.Location.X) / numberOfFrames;
             }
             if (newLocation.Y - current.Location.Y > 0)
             {
-                movingYFactor = (newLocation.Y - current.Location.Y) / 5;
+                movingYFactor = (newLocation.Y - current.Location.Y) / numberOfFrames;
             }
             else
             {
-                movingYFactor = (newLocation.Y - current.Location.Y) / 5;
+                movingYFactor = (newLocation.Y - current.Location.Y) / numberOfFrames;
             }
-                
-            int[,] moveArray = new int[5,2];// X is stored in [x,0] and Y is stored in [x,1]
-            for(int i = 0; i<4; i++) //For loop to calculate the coordinates needed for each frame of the fast movement animation and load them into the moveArray
+
+            int[,] moveArray = new int[numberOfFrames, 2];// X is stored in [x,0] and Y is stored in [x,1]
+            for (int i = 0; i < numberOfFrames - 1; i++) //For loop to calculate the coordinates needed for each frame of the fast movement animation and load them into the moveArray
             {
-                moveArray[i,0] = current.Location.X + (movingXFactor * (i+1));
-                moveArray[i,1] = current.Location.Y + (movingYFactor * (i+1));
+                moveArray[i, 0] = current.Location.X + (movingXFactor * (i + 1));
+                moveArray[i, 1] = current.Location.Y + (movingYFactor * (i + 1));
             }
-            moveArray[4, 0] = newLocation.X;
-            moveArray[4, 1] = newLocation.Y;
+            moveArray[numberOfFrames - 1, 0] = newLocation.X;
+            moveArray[numberOfFrames - 1, 1] = newLocation.Y;
 
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < numberOfFrames; j++)
             {
                 Thread.Sleep(10);
-                if(current.Left != moveArray[j,0] || current.Top != moveArray[j, 1])
+                if (current.Left != moveArray[j, 0] || current.Top != moveArray[j, 1])
                 {
                     HideCell(current);
                     Thread.Sleep(10);
                     MoveCellHorizontally(current, moveArray[j, 0]);
                     MoveCellVertically(current, moveArray[j, 1]);
-                        
+
                     Thread.Sleep(hScrollBar1.Value);
-                        
+
                 }
 
             }//end of for loop
@@ -142,24 +165,12 @@ namespace SearchForm
 
         private void HideCell(Label cell)
         {
-            Task.Factory.StartNew(() =>
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    cell.Hide();
-                });
-            });
+            cell.Invoke(new Action(() => cell.Hide()));
         }
 
         private void ShowCell(Label cell)
         {
-            Task.Factory.StartNew(() =>
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    cell.Show();
-                });
-            });
+            cell.Invoke(new Action(() => cell.Show()));
         }
 
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
@@ -174,14 +185,15 @@ namespace SearchForm
 
         private void SetCellArrayDefaults()
         {
-            for(int i = 0; i < cellArray.Length; i++)
+            for (int i = 0; i < cellArray.Length; i++)
             {
-                cellArray[i].Invoke(new Action(() => cellArray[i].AutoSize = defaultAutoSizeSetting) );
-                cellArray[i].Invoke(new Action(() => cellArray[i].Width = defaultCellWidth) );
-                cellArray[i].Invoke(new Action(() => cellArray[i].Height = defaultCellHeight) );
-                cellArray[i].Invoke(new Action(() => cellArray[i].BorderStyle = defaultCellBorderStyle) );
-                cellArray[i].Invoke(new Action(() => cellArray[i].TextAlign = defaultCellTextAlign) );
-                cellArray[i].Invoke(new Action(() => cellArray[i].Location = ArrayPositions[i]) );
+                cellArray[i].Invoke(new Action(() => cellArray[i].AutoSize = defaultAutoSizeSetting));
+                cellArray[i].Invoke(new Action(() => cellArray[i].Width = defaultCellWidth));
+                cellArray[i].Invoke(new Action(() => cellArray[i].Height = defaultCellHeight));
+                cellArray[i].Invoke(new Action(() => cellArray[i].BorderStyle = defaultCellBorderStyle));
+                cellArray[i].Invoke(new Action(() => cellArray[i].TextAlign = defaultCellTextAlign));
+                cellArray[i].Invoke(new Action(() => cellArray[i].BackColor = defaultColor));
+                cellArray[i].Invoke(new Action(() => cellArray[i].Location = ArrayPositions[i]));
                 string temp = (i + 1).ToString();
                 if (temp.Length == 1)
                     temp = "00" + temp;
@@ -189,12 +201,13 @@ namespace SearchForm
                     temp = "0" + temp;
                 cellArray[i].Invoke(new Action(() => cellArray[i].Text = temp));
                 cellArray[1].Invoke(new Action(() => cellArray[i].Hide()));
+                cellArray[i].Invoke(new Action(() => cellArray[i].Refresh()));
             }//end for loop
 
             systemActionLabel.Invoke(new Action(() => systemActionLabel.Text = "Program Ready"));
         }//end of SetCellArrayDefaults
 
-        private void LoadArrayPositions()
+        private void LoadArrayPositions() //This function loads the ArrayPositions with 
         {
             int tempX;
             int tempY;
@@ -202,12 +215,137 @@ namespace SearchForm
             for (tempY = 150; tempY < 410; tempY += 50)
             {
                 tempX = 20;
-                for(tempX = 20; tempX < 750; tempX += 40)
+                for (tempX = 20; tempX < 750; tempX += 40)
                 {
                     ArrayPositions[count] = new Point(tempX, tempY);
                     count++;
                 }
             }//end of for loop
         }// end of LoadArrayPositions
+
+        private bool LoadValueArray() //This function loads the value array with the values stored in the ArrayValue.txt file. 
+        {
+            if (label1.Visible == true)
+            {
+                HideEntireArray();
+            }
+            ChangeTitle("Loading Array");
+            if (System.IO.File.Exists(filePath) == true)
+            {
+                string[] temp;
+                temp = System.IO.File.ReadAllLines(filePath);
+                valueArray = new int[temp.Length];
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    try
+                    {
+                        int tempInt;
+                        tempInt = Int32.Parse(temp[i]);
+                        if (tempInt <= 999 && tempInt >= 0)
+                        {
+                            valueArray[i] = tempInt;
+                            NewCellText(cellArray[i], temp[i]);
+                            ChangeCellColor(cellArray[i], defaultColor);
+                            ShowCell(cellArray[i]);
+                            Thread.Sleep(hScrollBar1.Value);
+                        }
+                        else if (tempInt < 0)
+                        {
+                            MessageBox.Show("Value in " + filePath + " found less than zero.");
+                            return false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Value in " + filePath + " found greater than 999.");
+                            return false;
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Nonnumeric value found in " + filePath);
+                        return false;
+                    }
+
+                }
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(filePath + " does not exist");
+                return false;
+            }
+        }//end of LoadValueArray
+
+        private void NewCellText(Label label, string number)
+        {
+            if (number.Length == 1)
+            {
+                label.Invoke(new Action(() => label.Text = "00" + number));
+            }
+            else if (number.Length == 2)
+            {
+                label.Invoke(new Action(() => label.Text = "0" + number));
+            }
+            else
+            {
+                label.Invoke(new Action(() => label.Text = number));
+            }
+        } // end of NewCellText
+
+        private void ChangeTitle(string title)
+        {
+            systemActionLabel.Invoke(new Action(() => systemActionLabel.Text = title));
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+                for (int ix = 0; ix < checkedListBox1.Items.Count; ++ix)
+                    if (e.Index != ix) checkedListBox1.SetItemChecked(ix, false);
+        }
+
+        private void HideEntireArray()
+        {
+            for (int i = valueArray.Length - 1; i >= 0; i--)
+            {
+                HideCell(cellArray[i]);
+            }
+        }
+
+        private void LinearSearch()
+        {
+            ChangeTitle("Starting Linear Search");
+            Thread.Sleep(hScrollBar1.Value);
+            for (int i = 0; i < valueArray.Length; i++)
+            {
+                ChangeCellColor(cellArray[i], selected);
+                ChangeTitle("Comparing Cell Value to Target...");
+                Thread.Sleep(hScrollBar1.Value*2);
+                if(valueArray[i] == numericUpDown1.Value)
+                {
+                    ChangeCellColor(cellArray[i], correct);
+                    ChangeTitle("Target Found!");
+                    return;
+                }
+                else
+                {
+                    ChangeCellColor(cellArray[i], ignore);
+                    if (hScrollBar1.Value > 200)
+                    {
+                        ChangeTitle("Not Target, Moving On...");
+                    }                    
+                    Thread.Sleep(hScrollBar1.Value*2);
+                }
+            }
+
+            ChangeTitle("Target Not Found");
+
+        }
+
+        private void ChangeCellColor(Label cell, Color color)
+        {
+            cell.Invoke(new Action(() => cell.BackColor = color));
+        }
+
     }
 }

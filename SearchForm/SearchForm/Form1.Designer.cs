@@ -31,13 +31,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.startButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.labelX = new System.Windows.Forms.Label();
-            this.labelY = new System.Windows.Forms.Label();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.ScrollLabel = new System.Windows.Forms.Label();
-            this.updownCells = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -152,10 +147,11 @@
             this.label113 = new System.Windows.Forms.Label();
             this.label114 = new System.Windows.Forms.Label();
             this.systemActionLabel = new System.Windows.Forms.Label();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.findLabel = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.updownCells)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -180,6 +176,7 @@
             // 
             // label1
             // 
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Location = new System.Drawing.Point(20, 100);
             this.label1.Name = "label1";
@@ -187,48 +184,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "000";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(338, 28);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            800,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(57, 20);
-            this.numericUpDown1.TabIndex = 4;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(338, 54);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(57, 20);
-            this.numericUpDown2.TabIndex = 5;
-            // 
-            // labelX
-            // 
-            this.labelX.AutoSize = true;
-            this.labelX.Location = new System.Drawing.Point(318, 30);
-            this.labelX.Name = "labelX";
-            this.labelX.Size = new System.Drawing.Size(14, 13);
-            this.labelX.TabIndex = 6;
-            this.labelX.Text = "X";
-            // 
-            // labelY
-            // 
-            this.labelY.AutoSize = true;
-            this.labelY.Location = new System.Drawing.Point(318, 56);
-            this.labelY.Name = "labelY";
-            this.labelY.Size = new System.Drawing.Size(14, 13);
-            this.labelY.TabIndex = 7;
-            this.labelY.Text = "Y";
             // 
             // hScrollBar1
             // 
@@ -250,18 +205,6 @@
             this.ScrollLabel.Size = new System.Drawing.Size(25, 13);
             this.ScrollLabel.TabIndex = 9;
             this.ScrollLabel.Text = "500";
-            // 
-            // updownCells
-            // 
-            this.updownCells.Location = new System.Drawing.Point(175, 28);
-            this.updownCells.Name = "updownCells";
-            this.updownCells.Size = new System.Drawing.Size(75, 20);
-            this.updownCells.TabIndex = 10;
-            this.updownCells.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
             // 
             // label2
             // 
@@ -1291,12 +1234,50 @@
             this.systemActionLabel.TabIndex = 124;
             this.systemActionLabel.Text = "Cleaning Loose Cells";
             // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.CheckOnClick = true;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "Linear",
+            "Binary",
+            "Interpolation"});
+            this.checkedListBox1.Location = new System.Drawing.Point(613, 35);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(94, 49);
+            this.checkedListBox1.TabIndex = 125;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
+            // 
+            // findLabel
+            // 
+            this.findLabel.AutoSize = true;
+            this.findLabel.Location = new System.Drawing.Point(20, 44);
+            this.findLabel.Name = "findLabel";
+            this.findLabel.Size = new System.Drawing.Size(30, 13);
+            this.findLabel.TabIndex = 126;
+            this.findLabel.Text = "Find:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(23, 61);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 127;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.findLabel);
+            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.systemActionLabel);
             this.Controls.Add(this.label114);
             this.Controls.Add(this.label113);
@@ -1411,13 +1392,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.updownCells);
             this.Controls.Add(this.ScrollLabel);
             this.Controls.Add(this.hScrollBar1);
-            this.Controls.Add(this.labelY);
-            this.Controls.Add(this.labelX);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.pictureBox1);
@@ -1426,8 +1402,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.updownCells)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1438,13 +1412,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Label labelX;
-        private System.Windows.Forms.Label labelY;
         private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.Label ScrollLabel;
-        private System.Windows.Forms.NumericUpDown updownCells;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -1559,6 +1528,9 @@
         private System.Windows.Forms.Label label113;
         private System.Windows.Forms.Label label114;
         private System.Windows.Forms.Label systemActionLabel;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Label findLabel;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 
