@@ -147,11 +147,28 @@
             this.label113 = new System.Windows.Forms.Label();
             this.label114 = new System.Windows.Forms.Label();
             this.systemActionLabel = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.findLabel = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadArrayFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mixUpFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newRandomDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quickToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.heapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bubbleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.binaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.interpolationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PauseButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -187,11 +204,11 @@
             // 
             // hScrollBar1
             // 
-            this.hScrollBar1.Location = new System.Drawing.Point(449, 61);
-            this.hScrollBar1.Maximum = 1000;
-            this.hScrollBar1.Minimum = 50;
+            this.hScrollBar1.Location = new System.Drawing.Point(647, 446);
+            this.hScrollBar1.Maximum = 2000;
+            this.hScrollBar1.Minimum = 10;
             this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(80, 17);
+            this.hScrollBar1.Size = new System.Drawing.Size(141, 18);
             this.hScrollBar1.SmallChange = 10;
             this.hScrollBar1.TabIndex = 8;
             this.hScrollBar1.Value = 500;
@@ -200,7 +217,7 @@
             // ScrollLabel
             // 
             this.ScrollLabel.AutoSize = true;
-            this.ScrollLabel.Location = new System.Drawing.Point(449, 45);
+            this.ScrollLabel.Location = new System.Drawing.Point(609, 446);
             this.ScrollLabel.Name = "ScrollLabel";
             this.ScrollLabel.Size = new System.Drawing.Size(25, 13);
             this.ScrollLabel.TabIndex = 9;
@@ -722,7 +739,7 @@
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(324, 142);
+            this.label59.Location = new System.Drawing.Point(360, 130);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(41, 13);
             this.label59.TabIndex = 68;
@@ -1233,25 +1250,12 @@
             this.systemActionLabel.Size = new System.Drawing.Size(208, 24);
             this.systemActionLabel.TabIndex = 124;
             this.systemActionLabel.Text = "Cleaning Loose Cells";
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.CheckOnClick = true;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "Linear",
-            "Binary",
-            "Interpolation"});
-            this.checkedListBox1.Location = new System.Drawing.Point(613, 35);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(94, 49);
-            this.checkedListBox1.TabIndex = 125;
-            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
+            this.systemActionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // findLabel
             // 
             this.findLabel.AutoSize = true;
-            this.findLabel.Location = new System.Drawing.Point(20, 44);
+            this.findLabel.Location = new System.Drawing.Point(321, 45);
             this.findLabel.Name = "findLabel";
             this.findLabel.Size = new System.Drawing.Size(30, 13);
             this.findLabel.TabIndex = 126;
@@ -1259,7 +1263,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(23, 61);
+            this.numericUpDown1.Location = new System.Drawing.Point(319, 62);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             999,
             0,
@@ -1269,15 +1273,153 @@
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 127;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.sortToolStripMenuItem,
+            this.searchToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 129;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadArrayFileToolStripMenuItem,
+            this.mixUpFileToolStripMenuItem,
+            this.newRandomDataToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // loadArrayFileToolStripMenuItem
+            // 
+            this.loadArrayFileToolStripMenuItem.Name = "loadArrayFileToolStripMenuItem";
+            this.loadArrayFileToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.loadArrayFileToolStripMenuItem.Text = "Load Array";
+            this.loadArrayFileToolStripMenuItem.Click += new System.EventHandler(this.loadArrayFileToolStripMenuItem_Click);
+            // 
+            // mixUpFileToolStripMenuItem
+            // 
+            this.mixUpFileToolStripMenuItem.Name = "mixUpFileToolStripMenuItem";
+            this.mixUpFileToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.mixUpFileToolStripMenuItem.Text = "Mix Up Array";
+            this.mixUpFileToolStripMenuItem.Click += new System.EventHandler(this.mixUpFileToolStripMenuItem_Click);
+            // 
+            // newRandomDataToolStripMenuItem
+            // 
+            this.newRandomDataToolStripMenuItem.Name = "newRandomDataToolStripMenuItem";
+            this.newRandomDataToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.newRandomDataToolStripMenuItem.Text = "New Random Data";
+            // 
+            // searchToolStripMenuItem
+            // 
+            this.searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.linearToolStripMenuItem,
+            this.binaryToolStripMenuItem,
+            this.interpolationToolStripMenuItem});
+            this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.searchToolStripMenuItem.Text = "Search";
+            // 
+            // sortToolStripMenuItem
+            // 
+            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.insertionToolStripMenuItem,
+            this.selectionToolStripMenuItem,
+            this.quickToolStripMenuItem,
+            this.heapToolStripMenuItem,
+            this.mergeToolStripMenuItem,
+            this.bubbleToolStripMenuItem});
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.sortToolStripMenuItem.Text = "Sort";
+            // 
+            // insertionToolStripMenuItem
+            // 
+            this.insertionToolStripMenuItem.Name = "insertionToolStripMenuItem";
+            this.insertionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.insertionToolStripMenuItem.Text = "Insertion";
+            this.insertionToolStripMenuItem.Click += new System.EventHandler(this.InsertionToolStripMenuItem_Click);
+            // 
+            // selectionToolStripMenuItem
+            // 
+            this.selectionToolStripMenuItem.Name = "selectionToolStripMenuItem";
+            this.selectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.selectionToolStripMenuItem.Text = "Selection";
+            this.selectionToolStripMenuItem.Click += new System.EventHandler(this.selectionToolStripMenuItem_Click);
+            // 
+            // quickToolStripMenuItem
+            // 
+            this.quickToolStripMenuItem.Name = "quickToolStripMenuItem";
+            this.quickToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quickToolStripMenuItem.Text = "Quick";
+            this.quickToolStripMenuItem.Click += new System.EventHandler(this.quickToolStripMenuItem_Click);
+            // 
+            // heapToolStripMenuItem
+            // 
+            this.heapToolStripMenuItem.Name = "heapToolStripMenuItem";
+            this.heapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.heapToolStripMenuItem.Text = "Heap";
+            this.heapToolStripMenuItem.Click += new System.EventHandler(this.heapToolStripMenuItem_Click);
+            // 
+            // mergeToolStripMenuItem
+            // 
+            this.mergeToolStripMenuItem.Name = "mergeToolStripMenuItem";
+            this.mergeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mergeToolStripMenuItem.Text = "Merge";
+            this.mergeToolStripMenuItem.Click += new System.EventHandler(this.mergeToolStripMenuItem_Click);
+            // 
+            // bubbleToolStripMenuItem
+            // 
+            this.bubbleToolStripMenuItem.Name = "bubbleToolStripMenuItem";
+            this.bubbleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bubbleToolStripMenuItem.Text = "Bubble";
+            this.bubbleToolStripMenuItem.Click += new System.EventHandler(this.bubbleToolStripMenuItem_Click);
+            // 
+            // linearToolStripMenuItem
+            // 
+            this.linearToolStripMenuItem.Name = "linearToolStripMenuItem";
+            this.linearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.linearToolStripMenuItem.Text = "Linear";
+            this.linearToolStripMenuItem.Click += new System.EventHandler(this.linearToolStripMenuItem_Click);
+            // 
+            // binaryToolStripMenuItem
+            // 
+            this.binaryToolStripMenuItem.Name = "binaryToolStripMenuItem";
+            this.binaryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.binaryToolStripMenuItem.Text = "Binary";
+            this.binaryToolStripMenuItem.Click += new System.EventHandler(this.binaryToolStripMenuItem_Click);
+            // 
+            // interpolationToolStripMenuItem
+            // 
+            this.interpolationToolStripMenuItem.Name = "interpolationToolStripMenuItem";
+            this.interpolationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.interpolationToolStripMenuItem.Text = "Interpolation";
+            this.interpolationToolStripMenuItem.Click += new System.EventHandler(this.interpolationToolStripMenuItem_Click);
+            // 
+            // PauseButton
+            // 
+            this.PauseButton.Location = new System.Drawing.Point(12, 441);
+            this.PauseButton.Name = "PauseButton";
+            this.PauseButton.Size = new System.Drawing.Size(75, 23);
+            this.PauseButton.TabIndex = 130;
+            this.PauseButton.Text = "Pause";
+            this.PauseButton.UseVisualStyleBackColor = true;
+            this.PauseButton.Click += new System.EventHandler(this.PauseButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 468);
+            this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.findLabel);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.systemActionLabel);
             this.Controls.Add(this.label114);
             this.Controls.Add(this.label113);
@@ -1397,11 +1539,14 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1528,9 +1673,25 @@
         private System.Windows.Forms.Label label113;
         private System.Windows.Forms.Label label114;
         private System.Windows.Forms.Label systemActionLabel;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label findLabel;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadArrayFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mixUpFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newRandomDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem insertionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quickToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem heapToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mergeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bubbleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem linearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem binaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem interpolationToolStripMenuItem;
+        private System.Windows.Forms.Button PauseButton;
     }
 }
 
