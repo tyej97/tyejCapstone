@@ -30,5 +30,3 @@ _Search Function:_
 The speed of the animation is adjustable via the slider bar in the lower right corner and a pause button is available should the animation need to be paused momentarily.
 
 The program ultilizes color to mark or higlight certain cells. A deep blue or light yellow are used to signify that the method is marking that cell position as important or looking directly at that cell respectively. In search funtions, correct cells are recolored green while wrong cells are recolored red. Ignored cells are recolored dark gray signifying the method has skipped over them or the program has moved on to another cells and is done with that cell for the moment.
-Paragraphs are separated
-by a blank line.
