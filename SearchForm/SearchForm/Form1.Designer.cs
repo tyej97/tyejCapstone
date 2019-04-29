@@ -154,18 +154,17 @@
             this.loadArrayFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mixUpFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newRandomDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quickToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.heapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bubbleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.binaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.interpolationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PauseButton = new System.Windows.Forms.Button();
+            this.selectionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -1315,24 +1314,12 @@
             this.newRandomDataToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.newRandomDataToolStripMenuItem.Text = "New Random Data";
             // 
-            // searchToolStripMenuItem
-            // 
-            this.searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.linearToolStripMenuItem,
-            this.binaryToolStripMenuItem,
-            this.interpolationToolStripMenuItem});
-            this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.searchToolStripMenuItem.Text = "Search";
-            // 
             // sortToolStripMenuItem
             // 
             this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.insertionToolStripMenuItem,
             this.selectionToolStripMenuItem,
             this.quickToolStripMenuItem,
-            this.heapToolStripMenuItem,
-            this.mergeToolStripMenuItem,
             this.bubbleToolStripMenuItem});
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
             this.sortToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
@@ -1359,20 +1346,6 @@
             this.quickToolStripMenuItem.Text = "Quick";
             this.quickToolStripMenuItem.Click += new System.EventHandler(this.quickToolStripMenuItem_Click);
             // 
-            // heapToolStripMenuItem
-            // 
-            this.heapToolStripMenuItem.Name = "heapToolStripMenuItem";
-            this.heapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.heapToolStripMenuItem.Text = "Heap";
-            this.heapToolStripMenuItem.Click += new System.EventHandler(this.heapToolStripMenuItem_Click);
-            // 
-            // mergeToolStripMenuItem
-            // 
-            this.mergeToolStripMenuItem.Name = "mergeToolStripMenuItem";
-            this.mergeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mergeToolStripMenuItem.Text = "Merge";
-            this.mergeToolStripMenuItem.Click += new System.EventHandler(this.mergeToolStripMenuItem_Click);
-            // 
             // bubbleToolStripMenuItem
             // 
             this.bubbleToolStripMenuItem.Name = "bubbleToolStripMenuItem";
@@ -1380,24 +1353,34 @@
             this.bubbleToolStripMenuItem.Text = "Bubble";
             this.bubbleToolStripMenuItem.Click += new System.EventHandler(this.bubbleToolStripMenuItem_Click);
             // 
+            // searchToolStripMenuItem
+            // 
+            this.searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.linearToolStripMenuItem,
+            this.binaryToolStripMenuItem,
+            this.interpolationToolStripMenuItem});
+            this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.searchToolStripMenuItem.Text = "Search";
+            // 
             // linearToolStripMenuItem
             // 
             this.linearToolStripMenuItem.Name = "linearToolStripMenuItem";
-            this.linearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.linearToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.linearToolStripMenuItem.Text = "Linear";
             this.linearToolStripMenuItem.Click += new System.EventHandler(this.linearToolStripMenuItem_Click);
             // 
             // binaryToolStripMenuItem
             // 
             this.binaryToolStripMenuItem.Name = "binaryToolStripMenuItem";
-            this.binaryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.binaryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.binaryToolStripMenuItem.Text = "Binary";
             this.binaryToolStripMenuItem.Click += new System.EventHandler(this.binaryToolStripMenuItem_Click);
             // 
             // interpolationToolStripMenuItem
             // 
             this.interpolationToolStripMenuItem.Name = "interpolationToolStripMenuItem";
-            this.interpolationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.interpolationToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.interpolationToolStripMenuItem.Text = "Interpolation";
             this.interpolationToolStripMenuItem.Click += new System.EventHandler(this.interpolationToolStripMenuItem_Click);
             // 
@@ -1411,12 +1394,22 @@
             this.PauseButton.UseVisualStyleBackColor = true;
             this.PauseButton.Click += new System.EventHandler(this.PauseButton_Click);
             // 
+            // selectionLabel
+            // 
+            this.selectionLabel.Location = new System.Drawing.Point(679, 45);
+            this.selectionLabel.Name = "selectionLabel";
+            this.selectionLabel.Size = new System.Drawing.Size(102, 13);
+            this.selectionLabel.TabIndex = 131;
+            this.selectionLabel.Text = "No Selection";
+            this.selectionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(800, 468);
+            this.Controls.Add(this.selectionLabel);
             this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.findLabel);
@@ -1685,13 +1678,12 @@
         private System.Windows.Forms.ToolStripMenuItem insertionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quickToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem heapToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mergeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bubbleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem linearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem binaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem interpolationToolStripMenuItem;
         private System.Windows.Forms.Button PauseButton;
+        private System.Windows.Forms.Label selectionLabel;
     }
 }
 

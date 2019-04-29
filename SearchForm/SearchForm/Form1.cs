@@ -66,7 +66,10 @@ namespace SearchForm
                     SelectionSort();
                     break;
                 case "Quick":
-                    //QuickSort();
+                    QuickSort();
+                    break;
+                case "Bubble":
+                    BubbleSort();
                     break;
                 default: MessageBox.Show("No search or sort type selected.");
                     break;
@@ -344,6 +347,7 @@ namespace SearchForm
 
         private void MixUpArray()
         {
+            MultipleCellColorChange(0, cellList.Count - 1, defaultColor);
             Random random = new Random();
             int temp;
             for(int i = 0; i < cellList.Count; i++)
@@ -758,7 +762,7 @@ namespace SearchForm
             ChangeTitle("Insertion Sort Complete");
         }
 
-        public void SelectionSort()
+        private void SelectionSort()
         {
             ChangeTitle("Starting Selection Sort");
             Thread.Sleep(hScrollBar1.Value);
@@ -796,9 +800,140 @@ namespace SearchForm
             ChangeTitle("Selection Sort Complete");
         }
 
+        private void QuickSort()
+        {
+            ChangeTitle("Starting Quick Start");
+            MultipleCellColorChange(0, cellList.Count - 1, defaultColor);
+            Thread.Sleep(hScrollBar1.Value);
+            DoQuicksort(0, cellList.Count - 1);
+            ChangeTitle("Quick Sort Complete");
+            MultipleCellColorChange(0, cellList.Count - 1, defaultColor);
+        }
+
+        // Perform the quicksort algorithm for the indicated part of the array.
+        private void DoQuicksort(int min, int max)
+        {
+            int initialMin = min;
+            int initialMax = max;
 
 
+            // If min >= max, there's nothing to sort.
+            if (hScrollBar1.Value > 30)
+            {
+                ChangeTitle("Checking if min >= max");
+                Thread.Sleep(hScrollBar1.Value);
+            }
+            if (min >= max) return;
 
+            // Pick the dividing item.
+            Cell divider = cellList[min];
+            ChangeTitle("Setting divider at " + min);
+            ChangeCellColor(divider.GetLabel(), highlight);
+            Thread.Sleep(hScrollBar1.Value);
+
+            // Set left and right.
+            int left = min;
+            int right = max;
+            ChangeCellColor(cellList[left].GetLabel(), selected);
+            ChangeCellColor(cellList[right].GetLabel(), selected);
+            Thread.Sleep(hScrollBar1.Value);
+
+            // Divide the array into two halves.
+            while (left < right)
+            {
+                // The empty spot is at values[left].
+                // Look down from position right.
+                while ((right > left) && (cellList[right] > divider))
+                {
+                    ChangeCellColor(cellList[right].GetLabel(), ignore);
+                    right--;
+                    ChangeCellColor(cellList[right].GetLabel(), selected);
+                    Thread.Sleep(hScrollBar1.Value);
+                }
+
+                // See if we're done.
+                if (right <= left)
+                {
+                    MultipleCellColorChange(initialMin, initialMax, defaultColor);
+                    break;
+                }
+
+                // Swap this item into the left side.
+                SwapCells(left, right);
+                ChangeCellColor(cellList[left].GetLabel(), ignore);
+                left++;
+                ChangeCellColor(cellList[left].GetLabel(), selected);
+                Thread.Sleep(hScrollBar1.Value);
+
+                // The empty spot is at values[right].
+                // Look up from position left.
+                while ((right > left) && (cellList[left] < divider))
+                {
+                    ChangeCellColor(cellList[left].GetLabel(), ignore);
+                    left++;
+                    ChangeCellColor(cellList[left].GetLabel(), selected);
+                    Thread.Sleep(hScrollBar1.Value);
+                }
+
+                // See if we're done.
+                if (right <= left)
+                {
+                    MultipleCellColorChange(initialMin, initialMax, defaultColor);
+                    break;
+                }
+
+                // Swap this item into the right side.
+                SwapCells(right, left);
+                ChangeCellColor(cellList[right].GetLabel(), ignore);
+                right--;
+                ChangeCellColor(cellList[right].GetLabel(), selected);
+                Thread.Sleep(hScrollBar1.Value);
+            }
+
+            // Desposit the dividing item.
+            cellList[left] = divider;
+
+            // Recurse.
+            DoQuicksort(min, left - 1);
+            DoQuicksort(left + 1, max);
+        }
+
+        private void BubbleSort()
+        {
+            bool madeSwap = false;
+
+            ChangeTitle("Starting Bubble Sort");
+            Thread.Sleep(hScrollBar1.Value);
+
+            do
+            {
+                madeSwap = false;
+                ChangeTitle("Starting loop");
+                Thread.Sleep(hScrollBar1.Value);
+                int lastCellSwitched = 1;
+                for (int i = 1; i < cellList.Count; i++)
+                {
+                    // See if values[i] < values[i - 1].
+                    ChangeTitle("Comparing " + i + " to " + (i - 1));
+                    Thread.Sleep(hScrollBar1.Value);
+
+                    if (cellList[i].GetValue() < cellList[i - 1].GetValue())
+                    {
+                        // Swap values[i] and values[i - 1].
+                        SwapCells(i, i - 1);
+                        madeSwap = true;
+                        lastCellSwitched = i;
+                    }
+
+                }
+
+                MultipleCellColorChange(lastCellSwitched, cellList.Count-1, correct);
+
+            } while (madeSwap);
+
+            MultipleCellColorChange(0, cellList.Count - 1, correct);
+            ChangeTitle("Sort Complete");
+        }
 
 
 
@@ -879,46 +1014,53 @@ namespace SearchForm
         private void InsertionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selection = "Insertion";
+            selectionLabel.Text = "Insertion Sort";
         }
 
         private void selectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selection = "Selection";
+            selectionLabel.Text = "Selection Sort";
         }
 
         private void quickToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            selection = "Insertion";
+            selection = "Quick";
+            selectionLabel.Text = "Quick Sort";
         }
 
         private void heapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            selection = "Insertion";
+            //selection = "Insertion";
         }
 
         private void mergeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            selection = "Insertion";
+            //selection = "Insertion";
         }
 
         private void bubbleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            selection = "Insertion";
+            selection = "Bubble";
+            selectionLabel.Text = "Bubble Sort";
         }
 
         private void linearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selection = "Linear";
+            selectionLabel.Text = "Linear Search";
         }
 
         private void binaryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selection = "Binary";
+            selectionLabel.Text = "Binary Search";
         }
 
         private void interpolationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selection = "Interpolation";
+            selectionLabel.Text = "Interpolation Search";
         }
 
         private void PauseButton_Click(object sender, EventArgs e)
